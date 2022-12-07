@@ -35,25 +35,22 @@ let appendElementFunc = (element) => {
 }
 
 
-let baseURL = "https://jsonplaceholder.typicode.com";
+let baseUrl = "https://jsonplaceholder.typicode.com";
 let postsEndpoint = "/posts";
 
 // post url [baseurl + endpoint]
-let url = `${baseURL}${postsEndpoint}`;
+let url = `${baseUrl}${postsEndpoint}`;
 console.log(url);
 
+function getAllPosts() {
 fetch(url)
   .then((posts) => posts.json())
-  .then((response) => {
-    let posts = response
-
-    for (post of posts){
-        console.log(post.title);
-    }
-    // add a list of this posts to the html page
-    // DOM MANIPULATION
-
-    createElementFunc()
-    appendElementFunc()
-
-  });
+  .then((posts) => {
+    posts.forEach((post) => {
+      let span = document.createElement("li");
+       span.textContent = post.title;
+      let post_content = document.getElementById("parentList");
+      post_content.appendChild(span);
+    })
+  })
+} getAllPosts()
